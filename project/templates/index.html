@@ -24,8 +24,12 @@
       >
       {% endif %}
 
-      <br /><br />
+      {% if session.logged_in %}
+      <a class="btn btn-primary" role="button" href="{{ url_for('search') }}"
+        >Search</a>
+      {% endif %}
 
+      <br /><br />
       {% for message in get_flashed_messages() %}
       <div class="flash alert alert-success col-sm-4" role="success">
         {{ message }}

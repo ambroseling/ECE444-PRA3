@@ -44,14 +44,14 @@ def login_required(f):
 @app.route('/')
 def index():
     """Searches the database for entries, then displays them."""
-    entries = db.session.query(models.Post)
-    return render_template('index.html', entries=entries)
+    entries = db.session.query(models.Post) #queries for all the posts and shows them on the main page
+    return render_template('index.html', entries=entries) #render the main page
 
 
 @app.route('/add', methods=['POST'])
 def add_entry():
     """Adds new post to the database."""
-    if not session.get('logged_in'):
+    if not session.get('logged_in'): # wont allow you to add any entries if youre not signed in
         abort(401)
     new_entry = models.Post(request.form['title'], request.form['text'])
     db.session.add(new_entry)
